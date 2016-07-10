@@ -1,0 +1,29 @@
+.main-header {
+  background-color: black; }
+
+.title, .sub-title {
+  text-align: center;
+  color: orange; }
+
+.title {
+  margin-bottom: -15px; }
+
+.thumbnail {
+  float: left;
+  margin: 20px 75px; }
+
+.image-thumb-title {
+  position: relative;
+  top: -150px;
+  display: none;
+  max-width: 250;
+  text-align: center; }
+
+.image-thumb:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=100);
+  /* For IE8 and earlier */
+  cursor: pointer; }
+
+.image-thumb:hover + .image-thumb-title {
+  display: block; }

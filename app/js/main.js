@@ -1,48 +1,50 @@
 function loadXMLDoc() {
     var xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.open("GET", "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=735173d520e0cb31932c37536f25f57a&photoset_id=72157669819437490&user_id=142129438%40N03&format=json&nojsoncallback=1&auth_token=72157670865324245-72eeb90cad881193&api_sig=ccb6a9c38bc08036f7ba332e5f220642", false);
+    xmlhttp.open("GET", "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=8d9fc228ca6ff4b9d253daac6c58722d&photoset_id=72157669819437490&user_id=142129438%40N03&format=json&nojsoncallback=1&auth_token=72157669850415380-121d5abd9c1cc4e9&api_sig=3cd13b1bd2a1d0e0394660082fc467a9", true);
     
     xmlhttp.onreadystatechange = function(){
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
             var rsp = xmlhttp.response;
             var type = xmlhttp.getResponseHeader("Content-Type");
             var output = JSON.parse(rsp);
-            console.log(output);
+            //console.log(output);
 
             for(i =0; i < output.photoset.photo.length; i++) {
 
               // Create a DIV which will house the entire thumbnail
-              var image = document.createElement("DIV");
-              image.setAttribute("class", "thumbnail");
+              var thumb = document.createElement("DIV");
+              thumb.setAttribute("class", "thumbnail");
 
               // Create an Image tag which will have the thumbnail from Flickr
               var img = document.createElement("IMG");
               img.setAttribute("src", "https://farm" + output.photoset.photo[i].farm + ".staticflickr.com/" + output.photoset.photo[i].server + "/" + output.photoset.photo[i].id + "_" + output.photoset.photo[i].secret + "_q.jpg");
-              img.setAttribute("width", "250px");
+              img.setAttribute("width", "75px");
               img.setAttribute("alt", output.photoset.photo[i].title);
               img.setAttribute("class", "image-thumb");
+              img.setAttribute("id", i + 1);
+              img.setAttribute("onclick", "startLightBox()");
 
-              // Create a Paragraph tag with the title to be displayed on hover
-              var title = document.createElement("P");
-              var thumbTitle = document.createTextNode(output.photoset.photo[i].title);
-              title.appendChild(thumbTitle);
-              title.setAttribute("class", "image-thumb-title");
+              // // Create a Paragraph tag with the title to be displayed on hover
+              // var title = document.createElement("P");
+              // var thumbTitle = document.createTextNode(output.photoset.photo[i].title);
+              // title.appendChild(thumbTitle);
+              // title.setAttribute("class", "image-thumb-title");
 
-              // Append the image thumbnail to the page
-              document.body.appendChild(image);
-              image.appendChild(img);
-              image.appendChild(title);
-
+              // // Append the image thumbnail to the page
+              document.getElementById('main-content-container').appendChild(thumb);
+              thumb.appendChild(img);
+              // thumb.appendChild(title);
 
             }
-
         }
     }
     xmlhttp.send();
 }
 
 loadXMLDoc();
+
+
 
 
 
@@ -63,3 +65,25 @@ loadXMLDoc();
 //        }
 //     }
 // };
+
+
+// // Not currently working 
+// function startLightBox() {
+//   var lbBg = document.getElementById("lightBoxBg");
+//   var lb = document.getElementById("lightBox");
+//   var bigPic = document.createElement("IMG");
+//   bigPic.setAttribute("src", "https://farm" + output.photoset.photo[i].farm + ".staticflickr.com/" + output.photoset.photo[i].server + "/" + output.photoset.photo[i].id + "_" + output.photoset.photo[i].secret + "_q.jpg");
+//   document.getElementById('lightBox').appendChild(bigPic);
+
+
+//   lbBg.style.display = "block";
+//   lb.style.display = "block";
+
+// }
+
+// function dismiss() {
+//   var lbBg = document.getElementById("lightBoxBg");
+//   var lb = document.getElementById("lightBox");
+//   lbBg.style.display = "none";
+//   lb.style.display = " none";
+// }

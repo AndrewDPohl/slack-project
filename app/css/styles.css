@@ -1,5 +1,27 @@
+body, html, #wrapper {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+#wrapper {
+  position: relative; }
+
+#top, #main-content-container {
+  position: absolute; }
+
+#top {
+  height: 100px;
+  width: 100%;
+  background: grey; }
+
+#main-content-container {
+  top: 100px;
+  width: 100%;
+  background: black; }
+
 .main-header {
-  background-color: black; }
+  height: 100%;
+  width: 100%; }
 
 .title, .sub-title {
   text-align: center;
@@ -10,14 +32,7 @@
 
 .thumbnail {
   float: left;
-  margin: 20px 75px; }
-
-.image-thumb-title {
-  position: relative;
-  top: -150px;
-  display: none;
-  max-width: 250;
-  text-align: center; }
+  margin: 20px 50px; }
 
 .image-thumb:hover {
   opacity: 0.5;
@@ -25,5 +40,20 @@
   /* For IE8 and earlier */
   cursor: pointer; }
 
-.image-thumb:hover + .image-thumb-title {
-  display: block; }
+#lightBoxBg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0.5;
+  display: none;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  z-index: 10; }
+
+#lightBox {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  display: none;
+  z-index: 10; }

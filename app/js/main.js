@@ -1,48 +1,52 @@
-function loadXMLDoc() {
-    var xmlhttp = new XMLHttpRequest();
+_readyState(function() {
+  
+  function loadXMLDoc() {
+      
+      var xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.open("GET", "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=8d9fc228ca6ff4b9d253daac6c58722d&photoset_id=72157669819437490&user_id=142129438%40N03&format=json&nojsoncallback=1&auth_token=72157669850415380-121d5abd9c1cc4e9&api_sig=3cd13b1bd2a1d0e0394660082fc467a9", true);
-    
-    xmlhttp.onreadystatechange = function(){
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-            var rsp = xmlhttp.response;
-            var type = xmlhttp.getResponseHeader("Content-Type");
-            var output = JSON.parse(rsp);
-            //console.log(output);
+      xmlhttp.open("GET", " https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=ee9186c94164b96ca1d737d22bb19d4b&photoset_id=72157669819437490&user_id=142129438%40N03&per_page=20&format=json&nojsoncallback=1&auth_token=72157670276358121-93096b70ac47e6e2&api_sig=74d0b36fc94e1179ba113772a040c85c", true);
+      
+      xmlhttp.onreadystatechange = function(){
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+              var rsp = xmlhttp.response;
+              var type = xmlhttp.getResponseHeader("Content-Type");
+              var output = JSON.parse(rsp);
+              window.output = output;
+              console.log(output);
 
-            for(i =0; i < output.photoset.photo.length; i++) {
+              for(i =0; i < output.photoset.photo.length; i++) {
 
-              // Create a DIV which will house the entire thumbnail
-              var thumb = document.createElement("DIV");
-              thumb.setAttribute("class", "thumbnail");
+                // Create a DIV which will house the entire thumbnail
+                var thumb = document.createElement("DIV");
+                thumb.setAttribute("class", "thumbnail");
 
-              // Create an Image tag which will have the thumbnail from Flickr
-              var img = document.createElement("IMG");
-              img.setAttribute("src", "https://farm" + output.photoset.photo[i].farm + ".staticflickr.com/" + output.photoset.photo[i].server + "/" + output.photoset.photo[i].id + "_" + output.photoset.photo[i].secret + "_q.jpg");
-              img.setAttribute("width", "75px");
-              img.setAttribute("alt", output.photoset.photo[i].title);
-              img.setAttribute("class", "image-thumb");
-              img.setAttribute("id", i + 1);
-              img.setAttribute("onclick", "startLightBox()");
+                // Create an Image tag which will have the thumbnail from Flickr
+                var img = document.createElement("IMG");
+                img.setAttribute("src", "https://farm" + output.photoset.photo[i].farm + ".staticflickr.com/" + output.photoset.photo[i].server + "/" + output.photoset.photo[i].id + "_" + output.photoset.photo[i].secret + "_q.jpg");
+                img.setAttribute("width", "145px");
+                img.setAttribute("alt", output.photoset.photo[i].title);
+                img.setAttribute("class", "image-thumb");
+                img.setAttribute("id", i + 1);
+                img.setAttribute("onclick", "startLightBox(event)");
 
-              // // Create a Paragraph tag with the title to be displayed on hover
-              // var title = document.createElement("P");
-              // var thumbTitle = document.createTextNode(output.photoset.photo[i].title);
-              // title.appendChild(thumbTitle);
-              // title.setAttribute("class", "image-thumb-title");
+                // // Create a Paragraph tag with the title to be displayed on hover
+                // var title = document.createElement("P");
+                // var thumbTitle = document.createTextNode(output.photoset.photo[i].title);
+                // title.appendChild(thumbTitle);
+                // title.setAttribute("class", "image-thumb-title");
 
-              // // Append the image thumbnail to the page
-              document.getElementById('main-content-container').appendChild(thumb);
-              thumb.appendChild(img);
-              // thumb.appendChild(title);
+                // // Append the image thumbnail to the page
+                document.getElementById('main-content-container').appendChild(thumb);
+                thumb.appendChild(img);
+                // thumb.appendChild(title);
 
-            }
-        }
-    }
-    xmlhttp.send();
-}
+              }
+          }
+      }
+      xmlhttp.send();
+  }
 
-loadXMLDoc();
+  loadXMLDoc();
 
 
 
@@ -87,3 +91,5 @@ loadXMLDoc();
 //   lbBg.style.display = "none";
 //   lb.style.display = " none";
 // }
+
+});

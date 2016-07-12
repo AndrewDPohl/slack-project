@@ -31,8 +31,14 @@ body, html, #wrapper {
   margin-bottom: -15px; }
 
 .thumbnail {
-  float: left;
-  margin: 20px 50px; }
+  display: inline-block;
+  margin: 20px 55px; }
+
+.imageTitle {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-family: Helvetica; }
 
 .image-thumb:hover {
   opacity: 0.5;
@@ -53,7 +59,21 @@ body, html, #wrapper {
 
 #lightBox {
   position: absolute;
-  top: 25%;
+  top: 10%;
   left: 25%;
   display: none;
-  z-index: 10; }
+  z-index: 10;
+  background-color: black; }
+
+.bigPic {
+  max-width: 600px;
+  max-height: 400px;
+  padding: 10px; }
+
+@media (max-width: 490px) {
+  #main-content-container {
+    padding: 0 100px; } }
+
+@media (max-width: 400px) {
+  #main-content-container {
+    padding: 0 75px; } }

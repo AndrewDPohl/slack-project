@@ -1,0 +1,125 @@
+body, html, #wrapper {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  position: relative;
+}
+
+#top, #main-content-container {
+  position: absolute;
+}
+
+#top {
+  height: 100px;
+  width: 100%;
+  background: grey;
+}
+
+#main-content-container {
+  top: 100px;
+  width: 100%;
+  background: black;
+}
+
+.main-header {
+  height: 100%;
+  width: 100%;
+}
+
+.title, .sub-title {
+  text-align: center;
+  color: orange;
+}
+
+.title {
+  margin-bottom: -15px;
+}
+
+.thumbnail {
+  //float: left;
+  display: inline-block;
+  margin: 20px 55px;
+}
+
+.imageTitle {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-family: Helvetica;
+}
+
+.image-thumb:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=100); /* For IE8 and earlier */
+  cursor: pointer;
+}
+
+#lightBoxBg{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0.5;
+  display: none;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+
+#lightBox{
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  display: none;
+  z-index: 11;
+  background-color: black;
+
+  #nextButton, #prevButton {
+    position: absolute;
+    top: calc( 50% - 15px );
+    font-size: .8em;
+    border: 1px solid #eee;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+  }
+
+  #nextButton {
+    right: 15px;
+    width: 0; 
+    height: 0; 
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid white;
+  }
+
+  #prevButton {
+    left: 15px;
+    width: 0; 
+    height: 0; 
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid white;
+  }
+}
+
+.bigPic {
+  max-width: 600px;
+  max-height: 400px;
+  padding: 20px;
+}
+
+@media (max-width: 490px) {
+  #main-content-container {
+    padding: 0 100px;
+  }
+}
+
+@media (max-width: 400px) {
+  #main-content-container {
+   padding: 0 75px;
+  }
+}

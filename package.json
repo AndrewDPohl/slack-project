@@ -1,0 +1,27 @@
+{
+  "name": "slack-project",
+  "version": "1.0.0",
+  "description": "Static Photo Website Task for Slack Interview",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AndrewDPohl/slack-project.git"
+  },
+  "author": "Andy Pohl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndrewDPohl/slack-project/issues"
+  },
+  "homepage": "https://github.com/AndrewDPohl/slack-project",
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "gulp": "^3.9.1",
+    "gulp-if": "^2.0.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^1.5.4",
+    "gulp-useref": "^3.1.0"
+  }
+}

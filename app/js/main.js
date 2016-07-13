@@ -41,7 +41,7 @@ _readyState(function() {
                 // Create an Image tag which will have the thumbnail from Flickr
                 var img = document.createElement("IMG");
                 img.setAttribute("src", "https://farm" + output.photos.photo[i].farm + ".staticflickr.com/" + output.photos.photo[i].server + "/" + output.photos.photo[i].id + "_" + output.photos.photo[i].secret + "_q.jpg");
-                img.setAttribute("width", "145px");
+                img.setAttribute("width", "195px");
                 img.setAttribute("alt", output.photos.photo[i].title);
                 img.setAttribute("class", "image-thumb");
                 img.setAttribute("id", i + 1);

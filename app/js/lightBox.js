@@ -9,6 +9,7 @@ _readyState(function() {
     var imageInstance = imageId - 1;
     var imageForward = imageInstance + 1;
     var imageBackward = imageInstance - 1;
+    var imageNumberForward = imageInstance + 2;
 
     // Set some variables for the information you want to render
     var thisImage = this.output.photos.photo[imageInstance];
@@ -18,8 +19,8 @@ _readyState(function() {
     var flickrSecret = thisImage.secret;
 
     // Set variable names for the lightbox elements to be affected
-    var lbBg = document.getElementById("lightBoxBg");
-    var lb = document.getElementById("lightBox");
+    var lightBoxBackground = document.getElementById("lightBoxBg");
+    var lightBoxImage = document.getElementById("lightBox");
 
     // Set variable for the image being created
     var bigPic = document.createElement("IMG");
@@ -29,7 +30,7 @@ _readyState(function() {
     bigPic.setAttribute("class", "bigPic");
     bigPic.setAttribute("src", allPics[imageInstance].image);
 
-    // Create a Paragraph tag with the title to be displayed on hover
+    // Create a Paragraph tag with the title
     var title = document.createElement("P");
     var thumbTitle = document.createTextNode(allPics[imageInstance].title);
     var nextTitle = document.createTextNode(allPics[imageForward].title);
@@ -38,9 +39,18 @@ _readyState(function() {
     title.setAttribute("class", "imageTitle");
     title.setAttribute("id", "imageThumbTitle");
 
+    // Create a Paragraph tag with the number of the photo
+    var imageNumber = document.createElement("P");
+    var picNumber = document.createTextNode(imageId + " of 32");
+    var nextImageNumber = document.createTextNode(imageNumberForward + " of 32");
+    var prevImageNumber = document.createTextNode(imageInstance + " of 32");
+    imageNumber.setAttribute("class", "imageNumber");
+    imageNumber.setAttribute("id", "imageNumberId");
+    imageNumber.appendChild(picNumber);
+
     // Create NEXT and PREV buttons for the LightBox
-    var prev = document.createElement("P");
-    var next = document.createElement("P");
+    var prev = document.createElement("DIV");
+    var next = document.createElement("DIV");
     prev.setAttribute("id", "prevButton");
     prev.setAttribute("onclick", "previousPic()");
     next.setAttribute("id", "nextButton");
@@ -49,25 +59,24 @@ _readyState(function() {
 
 
     // Append the image
-    document.getElementById('lightBox').appendChild(bigPic);
-    document.getElementById('lightBox').appendChild(title);
-    document.getElementById('lightBox').appendChild(prev);
-    document.getElementById('lightBox').appendChild(next);
-    lbBg.style.display = "block";
-    lb.style.display = "block";
+    document.getElementById("lightBox").appendChild(bigPic);
+    document.getElementById("lightBox").appendChild(title);
+    document.getElementById("lightBox").appendChild(prev);
+    document.getElementById("lightBox").appendChild(next);
+    document.getElementById("lightBox").appendChild(imageNumber);
+    lightBoxBackground.style.display = "block";
+    lightBoxImage.style.display = "block";
 
     function nextPic() {
       var firstPic = allPics[0].image;
       var lastPic = allPics[output.photos.photo.length - 1].image;
       var currentPic = allPics[imageInstance].image;
       var nextPic = allPics[imageForward].image;
-      console.log("The first pic is " + firstPic);
-      console.log("The last pic is " + lastPic);
-      console.log("The current pic is " + currentPic);
-      console.log("The next pic is " + nextPic);
       bigPic.setAttribute("src", nextPic);
       title.removeChild(thumbTitle);
       title.appendChild(nextTitle);
+      imageNumber.removeChild(picNumber);
+      imageNumber.appendChild(nextImageNumber);
     }
 
     function previousPic() {
@@ -75,13 +84,11 @@ _readyState(function() {
       var lastPic = allPics[output.photos.photo.length - 1].image;
       var currentPic = allPics[imageInstance].image;
       var prevPic = allPics[imageBackward].image;
-      console.log("The first pic is " + firstPic);
-      console.log("The last pic is " + lastPic);
-      console.log("The current pic is " + currentPic);
-      console.log("The previous pic is " + prevPic);
       bigPic.setAttribute("src", prevPic);
       title.removeChild(thumbTitle);
       title.appendChild(prevTitle);
+      imageNumber.removeChild(picNumber);
+      imageNumber.appendChild(prevImageNumber);
     }
 
     window.nextPic = nextPic;
@@ -90,18 +97,20 @@ _readyState(function() {
   }
 
   function dismiss() {
-    var lbBg = document.getElementById("lightBoxBg");
-    var lb = document.getElementById("lightBox");
-    var lbp = document.getElementById("lightBoxPic");
-    var lbt = document.getElementById("imageThumbTitle");
-    var lbNext = document.getElementById("nextButton");
-    var lbPrev = document.getElementById("prevButton");
-    lbBg.style.display = "none";
-    lb.style.display = " none";
-    lbp.parentNode.removeChild(lbp);
-    lbt.parentNode.removeChild(lbt);
-    lbNext.parentNode.removeChild(lbNext);
-    lbPrev.parentNode.removeChild(lbPrev);
+    var lightBoxBackground = document.getElementById("lightBoxBg");
+    var lightBoxImage = document.getElementById("lightBox");
+    var lightBoxPic = document.getElementById("lightBoxPic");
+    var lightBoxTitle = document.getElementById("imageThumbTitle");
+    var lightBoxNext = document.getElementById("nextButton");
+    var lightBoxPrev = document.getElementById("prevButton");
+    var lightBoxNumber = document.getElementById("imageNumberId");
+    lightBoxBackground.style.display = "none";
+    lightBoxImage.style.display = " none";
+    lightBoxPic.parentNode.removeChild(lightBoxPic);
+    lightBoxTitle.parentNode.removeChild(lightBoxTitle);
+    lightBoxNext.parentNode.removeChild(lightBoxNext);
+    lightBoxPrev.parentNode.removeChild(lightBoxPrev);
+    lightBoxNumber.parentNode.removeChild(lightBoxNumber);
   }
 
   window.startLightBox = startLightBox;

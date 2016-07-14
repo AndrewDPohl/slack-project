@@ -1,5 +1,5 @@
 _readyState(function() {
-
+  // Create a function for opening up the lightbox with the image you want to display
   function startLightBox(event) {
 
     // Grab the image id
@@ -9,9 +9,8 @@ _readyState(function() {
     var imageInstance = imageId - 1;
     var imageForward = imageInstance + 1;
     var imageBackward = imageInstance - 1;
-    var imageNumberForward = imageInstance + 2;
 
-    // Set some variables for the information you want to render
+    // Set variables for the information you want to render
     var thisImage = this.output.photos.photo[imageInstance];
     var farm = thisImage.farm; 
     var server = thisImage.server;
@@ -30,7 +29,7 @@ _readyState(function() {
     bigPic.setAttribute("class", "bigPic");
     bigPic.setAttribute("src", allPics[imageInstance].image);
 
-    // Create a Paragraph tag with the title
+    // Create a Paragraph tag with the title to be displayed on hover
     var title = document.createElement("P");
     var thumbTitle = document.createTextNode(allPics[imageInstance].title);
     var nextTitle = document.createTextNode(allPics[imageForward].title);
@@ -39,31 +38,9 @@ _readyState(function() {
     title.setAttribute("class", "imageTitle");
     title.setAttribute("id", "imageThumbTitle");
 
-    // Create a Paragraph tag with the number of the photo
-    var imageNumber = document.createElement("P");
-    var picNumber = document.createTextNode(imageId + " of 32");
-    var nextImageNumber = document.createTextNode(imageNumberForward + " of 32");
-    var prevImageNumber = document.createTextNode(imageInstance + " of 32");
-    imageNumber.setAttribute("class", "imageNumber");
-    imageNumber.setAttribute("id", "imageNumberId");
-    imageNumber.appendChild(picNumber);
-
-    // Create NEXT and PREV buttons for the LightBox
-    var prev = document.createElement("DIV");
-    var next = document.createElement("DIV");
-    prev.setAttribute("id", "prevButton");
-    prev.setAttribute("onclick", "previousPic()");
-    next.setAttribute("id", "nextButton");
-    next.setAttribute("onclick", "nextPic()");
-
-
-
     // Append the image
-    document.getElementById("lightBox").appendChild(bigPic);
-    document.getElementById("lightBox").appendChild(title);
-    document.getElementById("lightBox").appendChild(prev);
-    document.getElementById("lightBox").appendChild(next);
-    document.getElementById("lightBox").appendChild(imageNumber);
+    document.getElementById('lightBox').appendChild(bigPic);
+    document.getElementById('lightBox').appendChild(title);
     lightBoxBackground.style.display = "block";
     lightBoxImage.style.display = "block";
 
@@ -75,8 +52,6 @@ _readyState(function() {
       bigPic.setAttribute("src", nextPic);
       title.removeChild(thumbTitle);
       title.appendChild(nextTitle);
-      imageNumber.removeChild(picNumber);
-      imageNumber.appendChild(nextImageNumber);
     }
 
     function previousPic() {
@@ -87,13 +62,10 @@ _readyState(function() {
       bigPic.setAttribute("src", prevPic);
       title.removeChild(thumbTitle);
       title.appendChild(prevTitle);
-      imageNumber.removeChild(picNumber);
-      imageNumber.appendChild(prevImageNumber);
     }
 
     window.nextPic = nextPic;
     window.previousPic = previousPic;
-    window.allPics = allPics;
   }
 
   function dismiss() {
@@ -101,20 +73,12 @@ _readyState(function() {
     var lightBoxImage = document.getElementById("lightBox");
     var lightBoxPic = document.getElementById("lightBoxPic");
     var lightBoxTitle = document.getElementById("imageThumbTitle");
-    var lightBoxNext = document.getElementById("nextButton");
-    var lightBoxPrev = document.getElementById("prevButton");
-    var lightBoxNumber = document.getElementById("imageNumberId");
     lightBoxBackground.style.display = "none";
     lightBoxImage.style.display = " none";
     lightBoxPic.parentNode.removeChild(lightBoxPic);
     lightBoxTitle.parentNode.removeChild(lightBoxTitle);
-    lightBoxNext.parentNode.removeChild(lightBoxNext);
-    lightBoxPrev.parentNode.removeChild(lightBoxPrev);
-    lightBoxNumber.parentNode.removeChild(lightBoxNumber);
   }
 
   window.startLightBox = startLightBox;
   window.dismiss = dismiss;
-  // window.nextPic = nextPic;
-  // window.previousPic = previousPic;
 });

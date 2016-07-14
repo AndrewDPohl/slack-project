@@ -2,60 +2,66 @@ _readyState(function() {
   
   function loadXMLDoc() {
       
+      // Set a variable for the API call
       var xmlhttp = new XMLHttpRequest();
 
-      xmlhttp.open("GET", "https://api.flickr.com/services/rest/?method=flickr.galleries.getPhotos&api_key=c4a1c9c293f61de168db06f6be812890&gallery_id=72157663354529069&per_page=20&format=json&nojsoncallback=1&api_sig=f29d84d9603883654ebab3cba30d6bf7", true);
+      // Open the API call
+      xmlhttp.open("GET", " https://api.flickr.com/services/rest/?method=flickr.galleries.getPhotos&api_key=b43677ae1b84e15997d4f5134df88173&gallery_id=72157663354529069&format=json&nojsoncallback=1", true);
 
       // Create a data structure for the image gallery
       var allPics = {};
 
+      // Make the API call
       xmlhttp.onreadystatechange = function(){
-          if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-              var rsp = xmlhttp.response;
-              var type = xmlhttp.getResponseHeader("Content-Type");
-              var output = JSON.parse(rsp);
-              window.output = output;
-              console.log(output);
+        // Check that the Call is complete and that it was a success
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+          // Grab the response data, parse it and set it up to be accessible
+          var rsp = xmlhttp.response;
+          var type = xmlhttp.getResponseHeader("Content-Type");
+          var output = JSON.parse(rsp);
+          window.output = output;
+          console.log(output);
 
-              // Loop through the response and grab data to create to create
-              // the larger version of the image, to be used later
-              for (i = 0; i < output.photos.photo.length; i++) {
-                var galImgId = i;
-                var thisImage = output.photos.photo[galImgId];
-                var galFarm = thisImage.farm; 
-                var galServer = thisImage.server;
-                var galFlickrId = thisImage.id;
-                var galFlickrSecret = thisImage.secret;
-                var galTitle = thisImage.title;
-                var galImgSrc = "https://farm" + galFarm + ".staticflickr.com/" + galServer + "/" + galFlickrId + "_" + galFlickrSecret + "_b.jpg";
-                allPics[i] = {image: galImgSrc, title: galTitle};
-              }
+          // Loop through the response and grab data to create to create
+          // the larger version of the image, to be used later
+          for (i = 0; i < output.photos.photo.length; i++) {
 
-              // Create then place the thumbnails
-              for(i =0; i < output.photos.photo.length; i++) {
+            // Set up and create the object that holds information for the
+            // larger versions of the photos
+            var galImgId = i;
+            var galImgNum = i + 1;
+            var thisImage = output.photos.photo[galImgId];
+            var galFarm = thisImage.farm; 
+            var galServer = thisImage.server;
+            var galFlickrId = thisImage.id;
+            var galFlickrSecret = thisImage.secret;
+            var galTitle = thisImage.title;
+            var galImgSrc = "https://farm" + galFarm + ".staticflickr.com/" + galServer + "/" + galFlickrId + "_" + galFlickrSecret + "_b.jpg";
+            allPics[i] = {image: galImgSrc, title: galTitle, num: galImgNum};
 
-                // Create a DIV which will house the entire thumbnail
-                var thumb = document.createElement("DIV");
-                thumb.setAttribute("class", "thumbnail");
+            // Create a DIV which will house the entire thumbnail
+            var thumb = document.createElement("DIV");
+            thumb.setAttribute("class", "thumbnail");
 
-                // Create an Image tag which will have the thumbnail from Flickr
-                var img = document.createElement("IMG");
-                img.setAttribute("src", "https://farm" + output.photos.photo[i].farm + ".staticflickr.com/" + output.photos.photo[i].server + "/" + output.photos.photo[i].id + "_" + output.photos.photo[i].secret + "_q.jpg");
-                img.setAttribute("width", "195px");
-                img.setAttribute("alt", output.photos.photo[i].title);
-                img.setAttribute("class", "image-thumb");
-                img.setAttribute("id", i + 1);
-                img.setAttribute("onclick", "startLightBox(event)");
+            // Create an Image tag which will have the thumbnail from Flickr
+            var img = document.createElement("IMG");
+            img.setAttribute("src", "https://farm" + output.photos.photo[i].farm + ".staticflickr.com/" + output.photos.photo[i].server + "/" + output.photos.photo[i].id + "_" + output.photos.photo[i].secret + "_q.jpg");
+            img.setAttribute("width", "195px");
+            img.setAttribute("alt", output.photos.photo[i].title);
+            img.setAttribute("class", "image-thumb");
+            img.setAttribute("id", i + 1);
+            img.setAttribute("onclick", "startLightBox(event)");
 
-                // Append the image thumbnail to the page
-                document.getElementById('main-content-container').appendChild(thumb);
-                thumb.appendChild(img);
-
-              }
+            // Append the image thumbnail to the page
+            document.getElementById('main-content-container').appendChild(thumb);
+            thumb.appendChild(img);
           }
+        }
+        
+        window.allPics = allPics;
 
-          window.allPics = allPics;
       }
+      
       xmlhttp.send();
   }
 

@@ -62,7 +62,6 @@ body, html, #wrapper {
 
 #lightBox {
   position: fixed;
-  top: 10%;
   left: 25%;
   display: none;
   z-index: 1001;
@@ -95,16 +94,20 @@ body, html, #wrapper {
     z-index: 1002; }
 
 .bigPic {
-  min-width: 600px;
-  min-height: 400px;
-  max-width: 600px;
-  max-height: 400px;
-  padding: 20px; }
+  min-width: 580px;
+  min-height: 380px;
+  max-width: 580px;
+  max-height: 380px;
+  padding: 20px;
+  border: 5px solid black;
+  background-repeat: no-repeat;
+  background-size: 580px 380px;
+  background-position: center; }
 
 @media (max-width: 490px) {
-  #main-content-container {
-    padding: 0 40px; } }
+  .thumbnail {
+    margin-left: 150px; } }
 
 @media (max-width: 400px) {
-  #main-content-container {
-    padding: 0 40px; } }
+  .thumbnail {
+    margin-left: 100px; } }

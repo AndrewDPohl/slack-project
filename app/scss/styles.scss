@@ -15,13 +15,13 @@ body, html, #wrapper {
 #top {
   height: 100px;
   width: 100%;
-  background: black;
+  background: #000;
 }
 
 #main-content-container {
   top: 100px;
   width: 100%;
-  background: white;
+  background: #fff;
 }
 
 .main-header {
@@ -48,7 +48,7 @@ body, html, #wrapper {
 
 .imageTitle, .imageNumber {
   text-align: center;
-  color: white;
+  color: #fff;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -69,7 +69,7 @@ body, html, #wrapper {
   left: 0px;
   opacity: 0.5;
   display: none;
-  background-color: white;
+  background-color: #fff;
   height: 100%;
   width: 100%;
   z-index: 1000;
@@ -80,7 +80,7 @@ body, html, #wrapper {
   left: 25%;
   display: none;
   z-index: 1001;
-  background-color: black;
+  background-color: #000;
 
   #nextButton, #prevButton {
     position: absolute;
@@ -89,42 +89,36 @@ body, html, #wrapper {
     border: 1px solid #eee;
     font-weight: bold;
     cursor: pointer;
-    color: black;
+    color: #000;
+    width: 0; 
+    height: 0; 
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    z-index: 1002;
   }
 
   #nextButton {
     right: -49px;
-    width: 0; 
-    height: 0; 
-    border-top: 50px solid transparent;
-    border-bottom: 50px solid transparent;
-    border-left: 50px solid black;
+    border-left: 50px solid #000;
     border-right: 0;
-    z-index: 1002;
   }
 
   #prevButton {
     left: -49px;
-    width: 0; 
-    height: 0; 
-    border-top: 50px solid transparent;
-    border-bottom: 50px solid transparent;
-    border-right: 50px solid black;
+    border-right: 50px solid #000;
     border-left: 0;
-    z-index: 1002;
   }
 }
 
 .bigPic {
-  min-width: 580px;
-  min-height: 380px;
-  max-width: 580px;
-  max-height: 380px;
+  height: 380px;
+  width: 580px;
   padding: 20px;
   border: 5px solid black;
   background-repeat: no-repeat;
   background-size: 580px 380px;
   background-position: center;
+  border-radius: 35px;
 }
 
 @media (max-width: 490px) {

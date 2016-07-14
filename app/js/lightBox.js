@@ -45,23 +45,31 @@ _readyState(function() {
     lightBoxImage.style.display = "block";
 
     function nextPic() {
-      var firstPic = allPics[0].image;
-      var lastPic = allPics[output.photos.photo.length - 1].image;
-      var currentPic = allPics[imageInstance].image;
-      var nextPic = allPics[imageForward].image;
-      bigPic.setAttribute("src", nextPic);
-      title.removeChild(thumbTitle);
-      title.appendChild(nextTitle);
+      // var firstPic = allPics[0].image;
+      // var lastPic = allPics[output.photos.photo.length - 1].image;
+      // var currentPic = allPics[imageInstance].image;
+      // var nextPic = allPics[imageForward].image;
+      // bigPic.setAttribute("src", nextPic);
+      // title.removeChild(thumbTitle);
+      // title.appendChild(nextTitle);
+
+      imageInstance = imageInstance + 1;
+      var inst = allPics[imageInstance];
+      inst.render(title, bigPic);
     }
 
     function previousPic() {
-      var firstPic = allPics[0].image;
-      var lastPic = allPics[output.photos.photo.length - 1].image;
-      var currentPic = allPics[imageInstance].image;
-      var prevPic = allPics[imageBackward].image;
-      bigPic.setAttribute("src", prevPic);
-      title.removeChild(thumbTitle);
-      title.appendChild(prevTitle);
+      // var firstPic = allPics[0].image;
+      // var lastPic = allPics[output.photos.photo.length - 1].image;
+      // var currentPic = allPics[imageInstance].image;
+      // var prevPic = allPics[imageBackward].image;
+      // bigPic.setAttribute("src", prevPic);
+      // title.removeChild(thumbTitle);
+      // title.appendChild(prevTitle);
+
+      imageInstance = imageInstance - 1;
+      var inst = allPics[imageInstance];
+      inst.render(title, bigPic);
     }
 
     window.nextPic = nextPic;

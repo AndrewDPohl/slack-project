@@ -52,7 +52,9 @@ body, html, #wrapper {
 .image-thumb:hover {
   filter: alpha(opacity=100); /* For IE8 and earlier */
   cursor: pointer;
-  box-shadow: 0 10px 10px black;
+  -moz-box-shadow:    0 10px 10px #000;
+  -webkit-box-shadow: 0 10px 10px #000;
+  box-shadow: 0 10px 10px #000;
 }
 
 #lightBoxBg{
@@ -115,6 +117,25 @@ body, html, #wrapper {
 @media (max-width: 490px) {
   .thumbnail {
     margin-left: 150px;
+  }
+}
+
+@media (min-width: 300px) {
+
+  .thumbnail {
+    margin-left: 60px;
+  }
+
+  #lightBox {
+    left: 16%;
+  }
+
+  .bigPic {
+    width: 170px;
+  }
+
+  .imageTitle {
+    font-size: 8px;
   }
 }
 
@@ -185,5 +206,15 @@ body, html, #wrapper {
 
   .imageTitle {
     font-size: 20px;
+  }
+}
+
+@media (max-height: 414px) {
+  .bigPic {
+    height: 200px;
+  }
+
+  #lightBox {
+    top: 0;
   }
 }

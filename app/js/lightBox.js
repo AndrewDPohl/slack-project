@@ -1,4 +1,5 @@
 _readyState(function() {
+  
   // Create a function for opening up the lightbox with the image you want to display
   function startLightBox(event) {
 
@@ -7,15 +8,6 @@ _readyState(function() {
     
     // Declare the instance of the item you want to reference
     var imageInstance = imageId - 1;
-    var imageForward = imageInstance + 1;
-    var imageBackward = imageInstance - 1;
-
-    // Set variables for the information you want to render
-    var thisImage = this.output.photos.photo[imageInstance];
-    var farm = thisImage.farm; 
-    var server = thisImage.server;
-    var flickrId = thisImage.id;
-    var flickrSecret = thisImage.secret;
 
     // Set variable names for the lightbox elements to be affected
     var lightBoxBackground = document.getElementById("lightBoxBg");
@@ -32,59 +24,69 @@ _readyState(function() {
     // Create a Paragraph tag with the title to be displayed on hover
     var title = document.createElement("P");
     var thumbTitle = document.createTextNode(allPics[imageInstance].title);
-    var nextTitle = document.createTextNode(allPics[imageForward].title);
-    var prevTitle = document.createTextNode(allPics[imageBackward].title);
     title.appendChild(thumbTitle);
     title.setAttribute("class", "imageTitle");
     title.setAttribute("id", "imageThumbTitle");
 
+    // Create a Paragraph tag with the number of the image being displayed
+    var picNum = document.createElement("P");
+    var thumbNumber = document.createTextNode("Image " + allPics[imageInstance].num + " of " + allPics.length);
+    picNum.appendChild(thumbNumber);
+    picNum.setAttribute("class", "imageNumber");
+    picNum.setAttribute("id", "imageNumberId");
+
     // Append the image
     document.getElementById('lightBox').appendChild(bigPic);
     document.getElementById('lightBox').appendChild(title);
+    document.getElementById('lightBox').appendChild(picNum);
     lightBoxBackground.style.display = "block";
     lightBoxImage.style.display = "block";
 
+    // Create a function that will change the bigPic to the next instance of GalleryImage
+    //  and the title to the next Title
     function nextPic() {
-      // var firstPic = allPics[0].image;
-      // var lastPic = allPics[output.photos.photo.length - 1].image;
-      // var currentPic = allPics[imageInstance].image;
-      // var nextPic = allPics[imageForward].image;
-      // bigPic.setAttribute("src", nextPic);
-      // title.removeChild(thumbTitle);
-      // title.appendChild(nextTitle);
-
-      imageInstance = imageInstance + 1;
+      // Account for the last image, and make sure it moves to the first,
+      //  else just move to the next
+      if (imageInstance === allPics.length - 1) {
+        imageInstance = 0;
+      } else {
+        imageInstance = imageInstance + 1;
+      }
       var inst = allPics[imageInstance];
-      inst.render(title, bigPic);
+      inst.render(title, bigPic, picNum);
     }
 
+    // Create a function that will change the bigPic to the previous instance of Gallery Image
+    //  and the title to the previous Title
     function previousPic() {
-      // var firstPic = allPics[0].image;
-      // var lastPic = allPics[output.photos.photo.length - 1].image;
-      // var currentPic = allPics[imageInstance].image;
-      // var prevPic = allPics[imageBackward].image;
-      // bigPic.setAttribute("src", prevPic);
-      // title.removeChild(thumbTitle);
-      // title.appendChild(prevTitle);
-
-      imageInstance = imageInstance - 1;
+      // Account for the first image, and make sure it moves to the last,
+      //  else just move to the previous
+      if (imageInstance === 0) {
+        imageInstance = allPics.length - 1;
+      } else {
+        imageInstance = imageInstance - 1;
+      }
       var inst = allPics[imageInstance];
-      inst.render(title, bigPic);
+      inst.render(title, bigPic, picNum);
     }
 
     window.nextPic = nextPic;
     window.previousPic = previousPic;
   }
 
+  // Function to exit out of the lightbox, which will remove the created Nodes for
+  //  the Image and Title
   function dismiss() {
     var lightBoxBackground = document.getElementById("lightBoxBg");
     var lightBoxImage = document.getElementById("lightBox");
     var lightBoxPic = document.getElementById("lightBoxPic");
     var lightBoxTitle = document.getElementById("imageThumbTitle");
+    var lightBoxNum = document.getElementById("imageNumberId");
     lightBoxBackground.style.display = "none";
     lightBoxImage.style.display = " none";
     lightBoxPic.parentNode.removeChild(lightBoxPic);
     lightBoxTitle.parentNode.removeChild(lightBoxTitle);
+    lightBoxNum.parentNode.removeChild(lightBoxNum);
   }
 
   window.startLightBox = startLightBox;

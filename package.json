@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/AndrewDPohl/slack-project/issues"
   },
-  "homepage": "https://github.com/AndrewDPohl/slack-project",
+  "homepage": "https://github.com/AndrewDPohl/slack-project/app/index.html",
   "devDependencies": {
     "browser-sync": "^2.13.0",
     "gulp": "^3.9.1",
